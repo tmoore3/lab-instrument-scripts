@@ -25,20 +25,19 @@ dp8xx = rm.open_resource(dp8xx_resource)
 
 # Configure DP8
 voltage = 2.4 # 2.4V
-current = 0.5 # 500mA
+current = 0.5 # 500 mA
 
-dp8xx.write(':OUTP CH1,0')
+dp8xx.write(':OUTPut CH1,0')
+dp8xx.write(':INSTrument:NSELect 1')
 
-dp8xx.write(':INST:NSEL 1')
+dp8xx.write(':VOLTage:PROTection ' + str(voltage + 0.5))
+dp8xx.write(':CURRent:PROTection ' + str(current + 0.5))
+dp8xx.write(':VOLTage:PROTection:STATe 1')
+dp8xx.write(':CURRent:PROTection:STATe 1')
 
-dp8xx.write(':VOLT:PROT ' + str(voltage + 0.5))
-dp8xx.write(':CURR:PROT ' + str(current + 0.5))
-dp8xx.write(':VOLT:PROT:STAT 1')
-dp8xx.write(':CURR:PROT:STAT 1')
+dp8xx.write(':VOLTage ' + str(voltage))
+dp8xx.write(':CURRent ' + str(current))
 
-dp8xx.write(':VOLT ' + str(voltage))
-dp8xx.write(':CURR ' + str(current))
-
-dp8xx.write(':OUTP CH1,1')
+dp8xx.write(':OUTPut CH1,1')
 
 dp8xx = rm.close
